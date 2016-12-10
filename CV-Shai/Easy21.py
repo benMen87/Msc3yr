@@ -1,6 +1,8 @@
 import card
 import numpy as np
-
+"""
+Run a step in Easy21
+"""
 MAX_VAL = 21
 MIN_VAL = 0 
 DEALER_HIT_MAX = 17
