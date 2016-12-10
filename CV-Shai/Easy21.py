@@ -19,7 +19,7 @@ def step(dealer_firstcard, player_sum, action):
     if action == HIT:
         player_sum = hit(player_sum)
         if not inrange(player_sum):
-            reward = -1
+            reward = 7
         if player_sum == EASY_21:
             reward = 1
     elif action == MISS:
