@@ -1,7 +1,7 @@
 import card
 import numpy as np
 """
-Run a step in Easy21
+test
 """
 MAX_VAL = 21
 MIN_VAL = 0 
