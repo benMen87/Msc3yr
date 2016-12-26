@@ -12,4 +12,3 @@ function x = genX(T, s)
 
     x(T) = mu + sigma.*randn(size(T));
 end
-

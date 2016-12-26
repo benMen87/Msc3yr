@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function [Cd, Cg, Cb] = gen_sampling_matrices(s, p, D)
     assert( p <= 1, ...
         'p is the fraction of s rows thus must be smaller than 1');

@@ -12,4 +12,3 @@ A_T = A(:, T);
 x_hat(T) = pinv(A_T' * A_T) * A_T' * y; %LSE solution
 
 end
-

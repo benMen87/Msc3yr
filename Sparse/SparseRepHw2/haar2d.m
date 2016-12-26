@@ -9,4 +9,3 @@ H1d = haar(s);
 H = kron(H1d, H1d);
 
 end
-

@@ -5,4 +5,3 @@ function y0 = genY0(s, x, D)
 %       x - support size of vec(input signale).
     y0 = D*x;
 end
-

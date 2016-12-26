@@ -16,4 +16,3 @@ function [ H ] = haar(s)
     end
 
 end
-
