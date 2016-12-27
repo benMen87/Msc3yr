@@ -1,39 +1,40 @@
-<<<<<<< HEAD
 function [Cd, Cg, Cb] = gen_sampling_matrices(s, p, D)
     assert( p <= 1, ...
         'p is the fraction of s rows thus must be smaller than 1');
-        %Verify No atoms are zeroed
-    i = 0;
-	while (true)
-    	Cd = gen_Cd(s, p);
-	    A = Cd*D;
-	    if find(~any(all(A == 0)))
-		    break;
-            disp('Done!!');
-	    end
-        i = i + 1;
-        if mod(i, 50) == 0
-            disp(sprintf('try # %d', i));
-        end
-    endwhile
+    %Verify No atoms are zeroed
     Cg = gen_Cg(s, p);
     Cb = gen_Cb(s);
+    i = 0;
+    A = 0;
+    Cd = gen_Cd(s, p);
+    while(any(all(A == 0)))
+        Cd = gen_Cd(s, p);
+	    A = Cd*D;
+        if (~any(all(A == 0)))
+            disp('Done!!');
+		    break;
+        end
+        i = i + 1;
+        if mod(i, 100) == 0
+            fprintf('try # %d', i);
+        end
+    end
 end
 
 
 function [C_d]  =  gen_Cd(s, p)
     assert( p <= 1, ...
         'p is the fraction of s rows thus must be smaller than 1');
-    l = 32;
     n = s^2;
-	v = [ones(1,l) / l, zeros(1,s-l)];
     m = floor(p * s^2);
-	M = sparse(toeplitz(v,v));
-
-	C_a = kron(M,M);
+    %l = 2;
+% 	v = [ones(1,l) / l, zeros(1,s-l)];
+% 	M = sparse(toeplitz(v,v));
+% 
+% 	C_a = kron(M,M);
 	C_d = eye(n);
     C_d = C_d(sort(randperm(n,  m)), :);
-	C_d = sparse(C_d*C_a);
+	C_d = sparse(imgaussfilt(C_d, 1.3));
 end
 
 function Cg = gen_Cg(s, p)
