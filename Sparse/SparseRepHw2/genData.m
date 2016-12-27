@@ -21,9 +21,9 @@ function [C_g, C_d, C_b,  D, T, x, y_d, y_g, y_b, y0]=genData(p,k,dr_ratio,D)
     end
 
     [C_d,  C_g, C_b] = gen_sampling_matrices(S, p, D);
-    T   = genT(s, k, S^2); % verify that n argument should be s^2
+    T   = genT(S, k, S^2); % verify that n argument should be s^2
     x   = genX(T, S);
-    y0  = genY0(S, x, D);
+    y0  = genY0(x, D);
     dr  = max(y0) - min(y0);
     w1 	= (dr*dr_ratio) *  randn([floor(p*S^2), 1]);
     w2 	= (dr*dr_ratio) *  randn([floor(S^2), 1]);

@@ -1,4 +1,4 @@
-function y0 = genY0(s, x, D)
+function y0 = genY0(x, D)
 %GEN_YO generate clean uncompresed signal y0
 %   INPUT:
 %       s - signal dimention is sXs

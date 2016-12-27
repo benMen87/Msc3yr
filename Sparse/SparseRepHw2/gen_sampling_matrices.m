@@ -7,34 +7,34 @@ function [Cd, Cg, Cb] = gen_sampling_matrices(s, p, D)
     i = 0;
     A = 0;
     Cd = gen_Cd(s, p);
-    while(any(all(A == 0)))
-        Cd = gen_Cd(s, p);
-	    A = Cd*D;
-        if (~any(all(A == 0)))
-            disp('Done!!');
-		    break;
-        end
-        i = i + 1;
-        if mod(i, 100) == 0
-            fprintf('try # %d', i);
-        end
-    end
+%     while(any(all(A == 0)))
+%         Cd = gen_Cd(s, p);
+% 	    A = Cd*D;
+%         if (~any(all(A == 0)))
+%             disp('Done!!');
+% 		    break;
+%         end
+%         i = i + 1;
+%         if mod(i, 100) == 0
+%             fprintf('try # %d', i);
+%         end
+%    end
 end
 
 
 function [C_d]  =  gen_Cd(s, p)
     assert( p <= 1, ...
         'p is the fraction of s rows thus must be smaller than 1');
+    l = 2;
     n = s^2;
+	v = [ones(1,l) / l, zeros(1,s-l)];
     m = floor(p * s^2);
-    %l = 2;
-% 	v = [ones(1,l) / l, zeros(1,s-l)];
-% 	M = sparse(toeplitz(v,v));
-% 
-% 	C_a = kron(M,M);
+	M = sparse(toeplitz(v,v));
+
+	C_a = kron(M,M);
 	C_d = eye(n);
     C_d = C_d(sort(randperm(n,  m)), :);
-	C_d = sparse(imgaussfilt(C_d, 1.3));
+	C_d = imgaussfilt(C_d*C_a);
 end
 
 function Cg = gen_Cg(s, p)
