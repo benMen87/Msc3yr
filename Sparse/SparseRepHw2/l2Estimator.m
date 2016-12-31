@@ -13,6 +13,7 @@ function x_hat = l2Estimator(y, C, D)
     %[xx_hat, cost] = ...
         %fminunc(@(t)(costFunction(t, C, D, y)), inital_x, options);
     %x_hat = A' * (A*A')^-1 * y;
+	
     xx_hat = C' * (C*C')^-1 * y;
     x_hat = D' * xx_hat;
 end

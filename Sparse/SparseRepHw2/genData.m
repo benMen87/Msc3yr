@@ -19,9 +19,19 @@ function [C_g, C_d, C_b,  D, T, x, y_d, y_g, y_b, y0]=genData(p,k,dr_ratio,D)
     if isempty(D)
         D = sparse(haar2d(S))'; %sparse transpose of Haar transform 
     end
-
-    [C_d,  C_g, C_b] = gen_sampling_matrices(S, p, D);
-    T   = genT(S, k, S^2); % verify that n argument should be s^2
+    
+    
+   [C_d,  C_g, C_b] = gen_sampling_matrices(S, p, D);
+   A = 0;
+   i = 0;
+   while(any(all(A == 0)))
+        T   = genT(S, k, S^2); % verify that n argument should be s^2
+        A = C_d*D(:, T);
+        disp(i);
+        i = i + 1;
+   end
+   
+   
     x   = genX(T, S);
     y0  = genY0(x, D);
     dr  = max(y0) - min(y0);
